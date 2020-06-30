@@ -1,0 +1,41 @@
+package com.chen.feignclient;
+
+import bean.CommonResponse;
+import bean.NewInfo;
+import com.github.pagehelper.PageInfo;
+import feign.hystrix.FallbackFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Component
+@Slf4j
+public class ContentFeignFactory implements FallbackFactory<ContentApi> {
+    @Override
+    public ContentApi create(Throwable throwable) {
+        return new ContentApi() {
+            @Override
+            public CommonResponse<PageInfo<NewInfo>> query(NewInfo newInfo) {
+                log.error("Content服务query接口异常");
+                return new CommonResponse(501,"服务繁忙，稍后再试",null);
+            }
+
+            @Override
+            public CommonResponse<NewInfo> queryDetail(Long id) {
+                log.error("Content服务queryDetail接口异常");
+                return new CommonResponse(501,"服务繁忙，稍后再试",null);
+            }
+
+            @Override
+            public CommonResponse<Integer> add(NewInfo newInfo) {
+                log.error("Content服务add接口异常");
+                return new CommonResponse(501,"服务繁忙，稍后再试",null);
+            }
+
+            @Override
+            public CommonResponse<Integer> update(NewInfo newInfo) {
+                log.error("Content服务update接口异常");
+                return new CommonResponse(501,"服务繁忙，稍后再试",null);
+            }
+        };
+    }
+}

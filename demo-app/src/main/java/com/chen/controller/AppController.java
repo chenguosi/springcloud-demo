@@ -1,8 +1,10 @@
 package com.chen.controller;
 
 import bean.CommonResponse;
+import bean.NewInfo;
 import bean.UserInfo;
 import com.chen.service.AppService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,29 +18,32 @@ public class AppController {
 
     // 用户注册
     @PostMapping("/registry")
-    public CommonResponse registry(@RequestBody UserInfo userInfo) {
-        CommonResponse commonResponse = appService.registry(userInfo);
+    public CommonResponse<Integer> registry(@RequestBody UserInfo userInfo) {
+        CommonResponse<Integer> commonResponse = appService.registry(userInfo);
         return commonResponse;
     }
 
     // 用户登录
     @GetMapping("/login")
-    public CommonResponse login(@RequestAttribute UserInfo userInfo) {
-        CommonResponse commonResponse = appService.login(userInfo);
+    public CommonResponse<String> login(@RequestAttribute UserInfo userInfo) {
+        CommonResponse<String> commonResponse = appService.login(userInfo);
         return commonResponse;
     }
 
     // 获取新闻列表
     @GetMapping("getNewsList")
-    public CommonResponse getNewsList(@RequestParam String name) {
-        CommonResponse commonResponse = appService.getNewsList(name);
+    public CommonResponse<PageInfo<NewInfo>> getNewsList(@RequestParam String name,
+                                                         @RequestParam(defaultValue = "1") Integer pageNum,
+                                                         @RequestParam(defaultValue = "10") Integer pageSize)
+    {
+        CommonResponse<PageInfo<NewInfo>> commonResponse = appService.getNewsList(name,pageNum,pageSize);
         return commonResponse;
     }
 
     // 查看新闻详情
     @GetMapping("/getNewDetail")
-    public CommonResponse getNewDetail(@RequestParam Long id) {
-        CommonResponse commonResponse = appService.getNewDetail(id);
+    public CommonResponse<NewInfo> getNewDetail(@RequestParam Long id) {
+        CommonResponse<NewInfo> commonResponse = appService.getNewDetail(id);
         return commonResponse;
     }
 }

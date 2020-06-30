@@ -1,12 +1,14 @@
 package com.chen.service.impl;
 
-import org.springframework.stereotype.Service;
-
+import bean.CommonResponse;
+import bean.NewInfo;
+import bean.UserInfo;
+import com.chen.feignclient.ContentApi;
 import com.chen.feignclient.SupportApi;
 import com.chen.service.AppService;
-
-import bean.CommonResponse;
-import bean.UserInfo;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -16,25 +18,50 @@ public class AppServiceImpl implements AppService {
     @Resource
     private SupportApi supportApi;
 
+    @Resource
+    private ContentApi contentApi;
+
     @Override
-    public CommonResponse registry(UserInfo userInfo) {
-        return null;
+    public CommonResponse<Integer> registry(UserInfo userInfo) {
+        // 参数合法性校验
+        CommonResponse response;
+        if (StringUtils.equals("demo",userInfo.getName())) {
+            response =  new CommonResponse(501,"fail",null);
+        } else {
+            response = supportApi.registry(userInfo);
+        }
+        return response;
     }
 
     @Override
-    public CommonResponse login(UserInfo userInfo) {
+    public CommonResponse<String> login(UserInfo userInfo) {
         // 用户密码校验
-        // 成功后返回JWT并将JWT写入缓存设置超时时间
-        return null;
+        CommonResponse loginResponse = supportApi.login(userInfo);
+         if (loginResponse.getCode() == 0) {
+             // 成功后返回JWT并将JWT写入缓存设置超时时间
+             // 使用JWT工具类生成token，放入缓存
+             String token="token123";
+             loginResponse.setData(token);
+         }
+         return loginResponse;
     }
 
     @Override
-    public CommonResponse getNewsList(String name) {
-        return null;
+    public CommonResponse<PageInfo<NewInfo>> getNewsList(String name, Integer pageNum, Integer pageSize) {
+        CommonResponse<PageInfo<NewInfo>> response;
+        if (StringUtils.isNotBlank(name)) {
+            NewInfo newInfo = new NewInfo();
+            newInfo.setTitle(name).setPageNum(pageNum).setPageSize(pageSize);
+            response = contentApi.query(newInfo);
+        } else {
+            response = new CommonResponse<PageInfo<NewInfo>>(501,"fail",null);
+        }
+        return response;
     }
 
     @Override
-    public CommonResponse getNewDetail(Long id) {
-        return null;
+    public CommonResponse<NewInfo> getNewDetail(Long id) {
+        CommonResponse<NewInfo> response = contentApi.queryDetail(id);
+        return response;
     }
 }

@@ -15,7 +15,7 @@ public interface UserInterface {
 
     // 用户注册
     @PostMapping("/user/registry")
-    CommonResponse registry(@RequestBody UserInfo userInfo);
+    CommonResponse<Integer> registry(@RequestBody UserInfo userInfo);
 
     // 用户登录
     @GetMapping("/user/login")

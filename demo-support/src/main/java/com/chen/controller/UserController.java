@@ -16,8 +16,8 @@ public class UserController {
 
     // 用户注册
     @PostMapping("/registry")
-    public CommonResponse registry(@RequestBody UserInfo userInfo) {
-        CommonResponse commonResponse = userService.registry(userInfo);
+    public CommonResponse<Integer> registry(@RequestBody UserInfo userInfo) {
+        CommonResponse<Integer> commonResponse = userService.registry(userInfo);
         return commonResponse;
     }
 
