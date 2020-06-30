@@ -11,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @Accessors(chain = true)
 @ToString
-public class NewInfo extends PageInfo implements Serializable {
+public class NewInfo extends PageParam implements Serializable {
 
     private static final long serialVersionUID = 5283009513693547092L;
 

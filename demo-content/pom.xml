@@ -40,8 +40,8 @@
 			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
 		</dependency>
 
 	</dependencies>

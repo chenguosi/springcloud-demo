@@ -2,19 +2,19 @@ package com.chen.feignclient;
 
 import bean.CommonResponse;
 import bean.NewInfo;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.db.PageResult;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ContentFeignFactory implements FallbackFactory<ContentApi> {
+public class ContentAdminFeignFactory implements FallbackFactory<ContentAdminApi> {
     @Override
-    public ContentApi create(Throwable throwable) {
-        return new ContentApi() {
+    public ContentAdminApi create(Throwable throwable) {
+        return new ContentAdminApi() {
             @Override
-            public CommonResponse<PageInfo<NewInfo>> query(NewInfo newInfo) {
+            public CommonResponse<PageResult<NewInfo>> query(NewInfo newInfo) {
                 log.error("Content服务query接口异常");
                 return new CommonResponse(501,"服务繁忙，稍后再试",null);
             }

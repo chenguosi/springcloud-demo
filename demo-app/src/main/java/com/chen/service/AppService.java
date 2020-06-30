@@ -3,7 +3,7 @@ package com.chen.service;
 import bean.CommonResponse;
 import bean.NewInfo;
 import bean.UserInfo;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.db.PageResult;
 
 public interface AppService {
 
@@ -11,7 +11,7 @@ public interface AppService {
 
     CommonResponse<String> login(UserInfo userInfo);
 
-    CommonResponse<PageInfo<NewInfo>> getNewsList(String name, Integer pageNum, Integer pageSize);
+    CommonResponse<PageResult<NewInfo>> getNewsList(String name, Integer pageNum, Integer pageSize);
 
     CommonResponse<NewInfo> getNewDetail(Long id);
 }

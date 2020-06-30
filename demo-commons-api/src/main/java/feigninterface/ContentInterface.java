@@ -2,7 +2,7 @@ package feigninterface;
 
 import bean.CommonResponse;
 import bean.NewInfo;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.db.PageResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,11 +12,11 @@ public interface ContentInterface {
 
     // 分页查询新闻
     @GetMapping("/content/query")
-    CommonResponse<PageInfo<NewInfo>> query(@RequestAttribute NewInfo newInfo);
+    CommonResponse<PageResult<NewInfo>> query(@RequestAttribute NewInfo newInfo);
 
     // 查询详细新闻
     @GetMapping("/content/queryDetail")
-    CommonResponse<NewInfo> queryDetail(@RequestParam Long id);
+    CommonResponse<NewInfo> queryDetail(@RequestParam(value = "id") Long id);
 
     @PostMapping("/content/add")
     CommonResponse<Integer> add(@RequestBody NewInfo newInfo);

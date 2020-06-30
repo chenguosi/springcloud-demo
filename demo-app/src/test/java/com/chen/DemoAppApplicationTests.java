@@ -3,8 +3,8 @@ package com.chen;
 import bean.CommonResponse;
 import bean.NewInfo;
 import bean.UserInfo;
+import cn.hutool.db.PageResult;
 import com.chen.service.AppService;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -61,7 +61,7 @@ class DemoAppApplicationTests {
 
     @Test
     void getNewsList(){
-        CommonResponse<PageInfo<NewInfo>> response;
+        CommonResponse<PageResult<NewInfo>> response;
         response = appService.getNewsList("test",1,10);
         assert response.getCode() == 0;
 

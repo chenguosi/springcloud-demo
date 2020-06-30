@@ -2,8 +2,8 @@ package com.chen.service.impl;
 
 import bean.CommonResponse;
 import bean.NewInfo;
+import cn.hutool.db.PageResult;
 import com.chen.service.ContentService;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +42,12 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public CommonResponse<PageInfo<NewInfo>> query(NewInfo newInfo) {
+    public CommonResponse<PageResult<NewInfo>> query(NewInfo newInfo) {
         if (StringUtils.equals("test",newInfo.getTitle())) {
             List<NewInfo> list = new ArrayList<>();
-            PageInfo<NewInfo> pageInfo = new PageInfo<>(list);
-            return new CommonResponse<PageInfo<NewInfo>>(0,"success", pageInfo);
+            PageResult<NewInfo> pageInfo = new PageResult<>();
+            pageInfo.addAll(list);
+            return new CommonResponse<PageResult<NewInfo>>(0,"success", pageInfo);
         } else {
             throw new RuntimeException("服务异常");
         }

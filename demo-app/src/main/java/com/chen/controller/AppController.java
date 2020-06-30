@@ -3,8 +3,8 @@ package com.chen.controller;
 import bean.CommonResponse;
 import bean.NewInfo;
 import bean.UserInfo;
+import cn.hutool.db.PageResult;
 import com.chen.service.AppService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -32,11 +32,11 @@ public class AppController {
 
     // 获取新闻列表
     @GetMapping("getNewsList")
-    public CommonResponse<PageInfo<NewInfo>> getNewsList(@RequestParam String name,
-                                                         @RequestParam(defaultValue = "1") Integer pageNum,
-                                                         @RequestParam(defaultValue = "10") Integer pageSize)
+    public CommonResponse<PageResult<NewInfo>> getNewsList(@RequestParam String name,
+                                                           @RequestParam(defaultValue = "1") Integer pageNum,
+                                                           @RequestParam(defaultValue = "10") Integer pageSize)
     {
-        CommonResponse<PageInfo<NewInfo>> commonResponse = appService.getNewsList(name,pageNum,pageSize);
+        CommonResponse<PageResult<NewInfo>> commonResponse = appService.getNewsList(name,pageNum,pageSize);
         return commonResponse;
     }
 

@@ -3,10 +3,10 @@ package com.chen.service.impl;
 import bean.CommonResponse;
 import bean.NewInfo;
 import bean.UserInfo;
+import cn.hutool.db.PageResult;
 import com.chen.feignclient.ContentApi;
 import com.chen.feignclient.SupportApi;
 import com.chen.service.AppService;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -47,14 +47,14 @@ public class AppServiceImpl implements AppService {
     }
 
     @Override
-    public CommonResponse<PageInfo<NewInfo>> getNewsList(String name, Integer pageNum, Integer pageSize) {
-        CommonResponse<PageInfo<NewInfo>> response;
+    public CommonResponse<PageResult<NewInfo>> getNewsList(String name, Integer pageNum, Integer pageSize) {
+        CommonResponse<PageResult<NewInfo>> response;
         if (StringUtils.isNotBlank(name)) {
             NewInfo newInfo = new NewInfo();
             newInfo.setTitle(name).setPageNum(pageNum).setPageSize(pageSize);
             response = contentApi.query(newInfo);
         } else {
-            response = new CommonResponse<PageInfo<NewInfo>>(501,"fail",null);
+            response = new CommonResponse<PageResult<NewInfo>>(501,"fail",null);
         }
         return response;
     }

@@ -2,8 +2,8 @@ package com.chen.controller;
 
 import bean.CommonResponse;
 import bean.NewInfo;
+import cn.hutool.db.PageResult;
 import com.chen.service.ContentService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,8 +39,8 @@ public class ContentController {
 
     // 分页查询新闻
     @GetMapping("/query")
-    public CommonResponse<PageInfo<NewInfo>> query(@RequestAttribute NewInfo newInfo) {
-        CommonResponse<PageInfo<NewInfo>> response = contentService.query(newInfo);
+    public CommonResponse<PageResult<NewInfo>> query(@RequestAttribute NewInfo newInfo) {
+        CommonResponse<PageResult<NewInfo>> response = contentService.query(newInfo);
         return response;
     }
 

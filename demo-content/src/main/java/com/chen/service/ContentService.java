@@ -3,7 +3,7 @@ package com.chen.service;
 
 import bean.CommonResponse;
 import bean.NewInfo;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.db.PageResult;
 
 public interface ContentService {
 
@@ -14,7 +14,7 @@ public interface ContentService {
 
     CommonResponse<Integer> update(NewInfo newInfo);
 
-    CommonResponse<PageInfo<NewInfo>> query(NewInfo newInfo);
+    CommonResponse<PageResult<NewInfo>> query(NewInfo newInfo);
 
     CommonResponse<NewInfo> queryDetail(Long id);
 }

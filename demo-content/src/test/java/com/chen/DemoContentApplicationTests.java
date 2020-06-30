@@ -2,8 +2,8 @@ package com.chen;
 
 import bean.CommonResponse;
 import bean.NewInfo;
+import cn.hutool.db.PageResult;
 import com.chen.service.ContentService;
-import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,7 +65,7 @@ class DemoContentApplicationTests {
     void query(){
         NewInfo test = new NewInfo(null,"test","123");
         NewInfo demo = new NewInfo(null,"demo","123");
-        CommonResponse<PageInfo<NewInfo>> response;
+        CommonResponse<PageResult<NewInfo>> response;
         response = contentService.query(test);
         assert response.getCode() == 0;
 
