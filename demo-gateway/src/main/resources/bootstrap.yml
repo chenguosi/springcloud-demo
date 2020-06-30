@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      label: master
+      name: demo-gateway
+      profile: dev
+      uri: http://localhost:3344/
+

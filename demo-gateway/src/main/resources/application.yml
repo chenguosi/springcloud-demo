@@ -1,0 +1,5 @@
+server:
+  port: 8848
+eureka:
+  instance:
+    instance-id: demoGateway8848
