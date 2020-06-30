@@ -1,0 +1,6 @@
+server:
+  port: 8031
+
+eureka:
+  instance:
+    instance-id: demoApp8031
