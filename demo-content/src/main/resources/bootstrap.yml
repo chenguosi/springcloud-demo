@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      label: master
+      name: demo-content
+      profile: dev
+      uri: http://localhost:3344/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

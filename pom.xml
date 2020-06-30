@@ -21,6 +21,8 @@
 		<module>demo-registry</module>
 		<module>demo-commons-api</module>
 		<module>demo-config</module>
+		<module>demo-support</module>
+		<module>demo-content</module>
 	</modules>
 
 	<properties>

@@ -1,0 +1,6 @@
+server:
+  port: 8021
+
+eureka:
+  instance:
+    instance-id: demoContent8021
